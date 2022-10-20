@@ -1,30 +1,44 @@
 ---
-title: "igraph_in_R"
+title: "igraph in R"
 author: "Mouwei Lin (lm3756) and Linhao Yu (ly2590)"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    fig_width: 5
+    fig_height: 3.5
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# this prevents package loading message from appearing in the rendered version of your problem set
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## 1. igraph Basics
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+First we download and install the package.
 
-```{r cars}
-summary(cars)
+```{r}
+#install.packages('igraph')  #remove '#' when you first download it.
+library(igraph)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+We will use an open source data set named 'phone.call' from 'navdata'.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+library(devtools)
+#install_github('kassambara/navdata') #remove '#' when you first download it.
+library(navdata)
+data("phone.call")
+head(phone.call)
+```
+### 1.1 Create igraph Network Object
+igraph has its specific network (graph) object called 'igraph'. The simplest way to create a 'igraph' is using graph.formula() to type every node and edge into it.
+```{r}
+graph.formula()
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
