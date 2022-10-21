@@ -24,7 +24,7 @@ library(igraph)
 ```
 
 
-We will use an open source data set named 'phone.call' from 'navdata'.
+We will use an open source data set named **phone.call** from **navdata**.
 
 ```{r}
 library(devtools)
@@ -35,7 +35,7 @@ head(phone.call)
 ```
 ### 1.1 Create igraph Network Object
 
-igraph has its specific network (graph) object called 'igraph'. The simplest way to create a 'igraph' is using graph.formula() to type every node and edge into it.
+igraph has its specific network (graph) object called 'igraph'. The simplest way to create a 'igraph' is using **graph.formula()** to type every node and edge into it.
 ```{r}
 graph.formula(A-B-C-D,A-E-F,Z-D-X)
 ```
@@ -59,7 +59,7 @@ edges<-phone.call%>%
 
 
 #### (1) build igraph object from dataframe:
-graph_from_data_frame()
+**graph_from_data_frame()**
 To use this method, we need two dataframes, one is edge frame, the other is vertexes frame.
 
 ```{r}
@@ -68,7 +68,7 @@ net_pc<-graph_from_data_frame(
    directed=TRUE)
 ```
 
-we can see that the graph is created. We can use V() or E() to visit vertexes or edges, and as_edgelist(net, names=T), as_adjacency_matrix(net, attr="weight") to catch edges list and adjacent matrix:
+we can see that the graph is created. We can use **V()** or **E()** to visit vertexes or edges, and **as_edgelist(net, names=T)**, **as_adjacency_matrix(net, attr="weight")** to catch edges list and adjacent matrix:
 ```{r}
 V(net_pc)
 V(net_pc)$location
@@ -79,7 +79,7 @@ as_adjacency_matrix(net_pc, attr="weight")
 
 
 #### (2) build igraph object from adjacent matrix:
-graph_from_adjacency_matrix()
+**graph_from_adjacency_matrix()**
 If the graph is using 
 
 ```{r}
@@ -97,9 +97,9 @@ plot(net_am)
 
 The plot function in igraph is very strong, it has lots of parameters to make the network graph more beautiful and clearer. In this section we will only give a general introductions to important visualization methods, we will have a more detailed introductions in the next section.
 
-A large number of parameters are used to display various properties of nodes, edges and graphs. The parameters related to nodes start with vertex.XXX, and the parameters related to edges start with edge.XXX 
+A large number of parameters are used to display various properties of nodes, edges and graphs. The parameters related to nodes start with **vertex.XXX**, and the parameters related to edges start with **edge.XXX**
 
-In addition to specifying the parameters of nodes and edges in plot(), you can also use the previously mentioned V() and E() to add the corresponding properties directly in the igraph object. The difference between the two methods is that the parameters specified in plot() do not change the properties of the plot. For example, we first specify the color of the node according to the position, and the width of the edge according to the weight (these two attributes will be saved in the net_pc object), and then specify the size of the node in the parameters of plot() (proportional to the degree of the node, The node degree is the number of edges connected to this node), the size and position of the node marker, the color of the edge, the size of the arrow, and the degree of curvature of the edge.
+In addition to specifying the parameters of nodes and edges in **plot()**, you can also use the previously mentioned **V()** and **E()** to add the corresponding properties directly in the igraph object. The difference between the two methods is that the parameters specified in **plot()** do not change the properties of the plot. For example, we first specify the color of the node according to the position, and the width of the edge according to the weight (these two attributes will be saved in the net_pc object), and then specify the size of the node in the parameters of **plot()** (proportional to the degree of the node, The node degree is the number of edges connected to this node), the size and position of the node marker, the color of the edge, the size of the arrow, and the degree of curvature of the edge.
 ```{r}
 # Calculate node's degree
 deg<-degree(net_pc,mode="all")
@@ -120,6 +120,45 @@ legend(x=-1.5,y=1.5,levels(factor(V(net_pc)$location)),pch=21,col="#777777",pt.b
 
 
 ### 1.3 Network Layout
+
+Network layout refers to the method of determining the coordinates of each node in the network. 
+
+A variety of layout algorithms are provided in igraph, the most useful of which are several Force-directed layout algorithms. Force-directed layouts try to get an aesthetically pleasing graph where the edges are similar in length and cross as little as possible. They model graphics as a physical system. Nodes are “charged particles” that repel each other when they get too close. These edges act as springs, attracting connected nodes together. As a result, nodes are evenly distributed in the illustrated area, and the layout is intuitive as nodes that share more connections are closer to each other. The disadvantage of these algorithms is that they are slow and therefore less frequently used in graphs larger than **1000** vertices.
+
+When using force-directed layout, you can use the **niter** parameter to control the number of iterations to perform. The default setting is 500 iterations. For large graphs, you can lower this number to get results faster and check that they are reasonable.
+
+**Fruchterman-Reingold** is the most widely used Force-directed layout method:
+
+```{r}
+# Fruchterman-Reingold layout method
+l <- layout_with_fr(net_pc) 
+plot(net_pc, layout=l)
+```
+
+
+The Fruchterman Reingold layout is random and different every run will result in slightly different layout configurations. Saving the layout in the object l allows us to obtain the exact same result multiple times (it is also possible to specify a random state by setting seed **seed()**)
+
+```{r}
+# All the layout methods in igraph
+layouts <- grep("^layout_", ls("package:igraph"), value=TRUE)[-1]
+layouts
+```
+
+
+There are 18 methods of layout in igraph, we won't go into detail for each layout method because most of them are not widely used except Fruchterman Reingold layout. However, we will give an example to show how those layouts look like:
+
+```{r}
+layouts <- grep("^layout_", ls("package:igraph"), value=TRUE)[-1]
+# Remove layouts that do not apply to our graph.
+layouts <- layouts[!grepl("bipartite|merge|norm|sugiyama|tree", layouts)]
+par(mfrow=c(5,3), mar=c(1,1,1,1)) 
+for (layout in layouts) {
+  print(layout)
+  l <- do.call(layout, list(net_pc))
+  plot(net_pc, vertex.label="",edge.arrow.mode=0,
+       layout=l,main=layout) }
+```
+
 
 
 
