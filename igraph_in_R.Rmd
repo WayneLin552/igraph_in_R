@@ -169,7 +169,7 @@ First, we customize the nodes parameters.
 set.seed(111)
 l <- layout_with_fr(net_pc) 
 plot(net_pc, 
-     vertex.color = 'red',                    # The color of nodes
+     vertex.color = 'pink',                   # The color of nodes
      vertex.frame.color = 'lightblue',        # The color of node frames
      vertex.shape = c('circle','rectangle'),  # The color of node shapes
      vertex.size = 25,                        # The size of a node
@@ -180,7 +180,7 @@ plot(net_pc,
 Next, we customize the node labels.
 ```{r}
 plot(net_pc, 
-     vertex.color = 'red',                    
+     vertex.color = 'pink',                    
      vertex.frame.color = 'lightblue',        
      vertex.shape = c('circle','rectangle'),  
      vertex.size = 25,                        
@@ -197,7 +197,7 @@ plot(net_pc,
 Apart from nodes, we can also modify edge features while plotting.
 ```{r}
 plot(net_pc, 
-     vertex.color = 'red',                    
+     vertex.color = 'pink',                    
      vertex.frame.color = 'lightblue',        
      vertex.shape = c('circle','rectangle'),  
      vertex.size = 25,                        
