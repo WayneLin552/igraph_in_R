@@ -170,9 +170,9 @@ set.seed(111)
 l <- layout_with_fr(net_pc) 
 plot(net_pc, 
      vertex.color = 'red',                    # The color of nodes
-     vertex.frame.color = 'lightblue',        # The color of nodes' frame
-     vertex.shape = c('circle','rectangle'),  # The color of nodes' frame
-     vertex.size = 25,                        # The size of a vertex
+     vertex.frame.color = 'lightblue',        # The color of node frames
+     vertex.shape = c('circle','rectangle'),  # The color of node shapes
+     vertex.size = 25,                        # The size of a node
      vertex.size2 = 15,                       # For rectangle, we need two parameters to specify its shape
      
      layout = l)
@@ -190,7 +190,7 @@ plot(net_pc,
      vertex.label.family = 'Helvetica',  # Change the font family of labels
      vertex.label.font = 3,              # Change the font to italic
      vertex.label.cex = 0.8,             # Change the size of labels
-     vertex.label.dist = 0.5,            # Change the distance between labels and nodes' frames
+     vertex.label.dist = 0.5,            # Change the distance between labels and node frames
   
      layout = l)
 ```
@@ -254,7 +254,7 @@ plot(karate,
      vertex.label = V(karate)$label,
      layout  = l)
 ```
-Finally, we divide the edges into three categories and use different colors for them. Remember the karate club is splitted into two factions, so the edges can be divided into: edges inside faction 1, edges inside faction 2, and edges connecting both factions. \
+Finally, we divide the edges into three categories and use different colors for them. Remember the karate club is split into two factions, so the edges can be divided into: edges inside faction 1, edges inside faction 2, and edges connecting both factions. \
 Besides, we also set up the edge width according to its weight.
 ```{r}
 # Define factions
