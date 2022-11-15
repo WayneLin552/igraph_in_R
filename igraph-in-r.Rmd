@@ -10,7 +10,19 @@ output:
 
 ## Introduction
 
+### Motivation
+
+Network graphs are widely used in daily lives, it will clearly show us the relationship between individuals. A good network graph can give us a very brief understanding about who are more important, who connect the different groups and who are the centers. So we want to go into detail to learn how to draw a beautiful network graph in R.
+
+### Need it addresses
+
 This will be a very brief introduction about a R package called igraph, which is a complex network analysis tool in R. It will contain commonly used and important functions. We believe if you look at this cheat sheet, you can handle most of the network visualization problems.
+
+### What we learned/ what might do differently next time
+
+What we learned was direct, we learned how to draw the network graph in R correctly and clearly. We learned how to tune the hyperparameters in igraph to make the network graph much easier to read and catch the key factors.
+
+To further discover this package, we may consider using more other layouts because different layouts have different advantages in some specific questions.
 
 ```{r setup, include=FALSE}
 # this prevents package loading message from appearing in the rendered version of your problem set
